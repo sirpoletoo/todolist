@@ -1,0 +1,23 @@
+meta {
+  name: Criar tarefa
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/tarefas
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "titulo": "Comprar pão",
+    "descricao": "Pão francês integral",
+    "dataConclusao": "2025-07-30T18:00:00Z"
+  }
+}
