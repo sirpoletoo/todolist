@@ -1,0 +1,29 @@
+Vamos ver um exemplo de como uma requisição POST /tarefas (Criar Tarefa) passaria por essas camadas:
+
+Usuário envia uma requisição POST para /tarefas com os dados da nova tarefa.
+
+src/app.js (via Express) recebe a requisição e a direciona para o método criar em src/controllers/TarefaController.js.
+
+TarefaController.js extrai os dados do req.body e chama TarefaService.criarTarefa(dados).
+
+TarefaService.js recebe os dados:
+
+Executa validações (ex: validarDadosTarefa(dados)).
+
+Verifica se a tarefa já existe chamando TarefaRepository.buscarPorTitulo(titulo).
+
+Se tudo estiver ok, chama TarefaRepository.salvar(dados).
+
+TarefaRepository.js recebe os dados:
+
+Converte os dados para o formato do banco (se necessário, ex: JSON.stringify).
+
+Executa a query INSERT INTO tarefas (...) no db/todo.db (via db/database.js).
+
+Retorna a tarefa criada (com ID) para o TarefaService.
+
+TarefaService.js recebe a tarefa criada e a retorna para o TarefaController.
+
+TarefaController.js recebe a tarefa criada e envia uma resposta HTTP 201 Created com os dados da tarefa para o Usuário.
+
+Essa estrutura pode parecer um pouco mais complexa no início, mas ela é um padrão robusto que vai te economizar muita dor de cabeça no futuro, permitindo que seu projeto cresça de forma organizada e escalável.
