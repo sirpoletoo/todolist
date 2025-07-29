@@ -1,0 +1,26 @@
+meta {
+  name: Atualizar tarefa
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:3000/tarefas/1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "id": 1,
+      "titulo": "Fazer comida",
+      "descricao": "Macarrão com frango",
+      "dataCriacao": "2025-07-24T16:20:00.678Z",
+      "dataConclusao": null,
+      "concluida": false
+    }
+}
+
+settings {
+  encodeUrl: true
+}
